@@ -1,3 +1,6 @@
+const { default: mongoose } = require("mongoose");
+const Movie = require("../models/Movie.model");
+
 const movies = [
     {
       title: "A Wrinkle in Time",
@@ -80,3 +83,15 @@ const movies = [
       showtimes: ["13:00", "15:30", "18:00", "20:10", "22:40"]
     }
   ];
+
+
+
+  require("../db");
+
+  Movie.insertMany(movies)
+  .then((result) => {
+    console.log("Initial movies imported", result);
+    mongoose.connection.close();
+  
+  })
+  .catch((err) => console.error(err))
